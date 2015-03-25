@@ -87,6 +87,7 @@ func (r *rabbitmqQ) UnSub() error {
 }
 
 func (r *rabbitmqQ) Sub() (chan []byte, error) {
+        fmt.Println("Entered Subz")
 	chnl, err := r.factory.getChonn(r.key(), r.exchname(), r.qname())
 	if err != nil {
 		return nil, err
@@ -129,10 +130,14 @@ type rabbitmqQFactory struct {
 }
 
 func (factory *rabbitmqQFactory) Get(name string) (PubSubQ, error) {
+        fmt.Println("Entered getz")
+
 	return &rabbitmqQ{name: name, prefix: "megam", factory: factory}, nil
 }
 
 func (factory *rabbitmqQFactory) Dial() (*amqp.Connection, error) {
+        fmt.Println("Entered dialz")
+
 	addr, err := config.GetString("amqp:url")
 	if err != nil {
 		addr = "amqp://localhost:5672/"
