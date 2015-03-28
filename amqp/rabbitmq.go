@@ -100,7 +100,7 @@ func (r *rabbitmqQ) Sub() (chan []byte, error) {
 	log.Printf(" [x] Subscribing (%s,%s)", r.qname(), r.tag())
 
 	deliveries, err := chnl.Consume(
-		r.qname(), // name
+		r.name, // name
 		r.tag(),   // consumerTag,
 		true,     // noAck
 		false,     // exclusive
@@ -135,7 +135,7 @@ type rabbitmqQFactory struct {
 func (factory *rabbitmqQFactory) Get(name string) (PubSubQ, error) {
         fmt.Println("Entered getz")
 
-	return &rabbitmqQ{name: name, prefix: "megam", factory: factory}, nil
+	return &rabbitmqQ{name: name, prefix: "datadust", factory: factory}, nil
 }
 
 func (factory *rabbitmqQFactory) Dial() (*amqp.Connection, error) {
