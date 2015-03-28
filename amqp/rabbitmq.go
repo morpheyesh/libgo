@@ -108,6 +108,9 @@ func (r *rabbitmqQ) Sub() (chan []byte, error) {
 		false,     // noWait
 		nil,       // arguments
 	)
+	fmt.Println("--------------printing delkiveries--------")
+	fmt.Println(deliveries)
+	fmt.Println("-------------------------------------------")
 	if err != nil {
 		return nil, err
 	}
@@ -207,7 +210,7 @@ func (factory *rabbitmqQFactory) getChonn(key string, exchname string, qname str
 	if err != nil {
 		return nil, err
 	}
-	
+
 	log.Printf(" [x] Declared queue (%s)", qname)
 
 	if err = chnl.QueueBind(
