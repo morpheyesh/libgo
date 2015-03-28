@@ -108,7 +108,7 @@ func (r *rabbitmqQ) Sub() (chan []byte, error) {
 		false,     // noWait
 		nil,       // arguments
 	)
-	fmt.Println("--------------printing delkiveries--------")
+	fmt.Println("--------------printing delkiveries---===-----")
 	fmt.Println(deliveries)
 	fmt.Println("-------------------------------------------")
 	if err != nil {
