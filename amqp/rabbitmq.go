@@ -87,6 +87,7 @@ func (r *rabbitmqQ) UnSub() error {
 }
 
 func (r *rabbitmqQ) Sub() (chan []byte, error) {
+        fmt.Println("Entered Subz")
 	chnl, err := r.factory.getChonn(r.key(), r.exchname(), r.qname())
 	if err != nil {
 		return nil, err
@@ -97,7 +98,7 @@ func (r *rabbitmqQ) Sub() (chan []byte, error) {
 	msgChan := make(chan []byte)
 
 	deliveries, err := chnl.Consume(
-		r.qname(), // name
+		r.name, // name
 		r.tag(),   // consumerTag,
 		true,      // noAck
 		false,     // exclusive
@@ -105,6 +106,7 @@ func (r *rabbitmqQ) Sub() (chan []byte, error) {
 		false,     // noWait
 		nil,       // arguments
 	)
+
 	if err != nil {
 		return nil, err
 	}
@@ -132,6 +134,7 @@ func (f *rabbitmqQFactory) Get(name string) (PubSubQ, error) {
 
 func (f *rabbitmqQFactory) Dial() (*amqp.Connection, error) {
 	conn, err := amqp.Dial(f.BindAddress)
+
 
 	if err != nil {
 		return nil, err
@@ -188,7 +191,9 @@ func (factory *rabbitmqQFactory) getChonn(key string, exchname string, qname str
 	if err != nil {
 		return nil, err
 	}
+
 	log.Debugf(cmd.Colorfy("  > [amqp] queue ", "blue", "", "bold") + fmt.Sprintf("%s success", qname))
+
 
 
 	if err = chnl.QueueBind(

@@ -135,7 +135,6 @@ func (p *Pipeline) Execute(params ...interface{}) error {
 	}
 
 	log.Debugf(cmd.Colorfy(fmt.Sprintf("==> pipeline [%d]", len(p.actions)), "white", "", "bold"))
-
 	fwCtx := FWContext{Params: params}
 	for i, a := range p.actions {
 		log.Debugf(cmd.Colorfy(fmt.Sprintf("  => step %d: %s action", i, a.Name), "green", "", "bold"))
