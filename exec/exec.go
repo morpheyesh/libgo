@@ -1,5 +1,5 @@
 
-// Package exec provides a interface to run external commans as an
+// Package exec provides a interface to run external commands as an
 // abstraction layer.
 package exec
 
